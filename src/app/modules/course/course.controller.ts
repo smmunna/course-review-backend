@@ -1,8 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import { courseValidationSchema } from "./course.validation";
 
 
-const createCourse = async (req: Request, res: Response) => {
-    console.log('I am requesting..')
+const createCourse = async (req: Request, res: Response, next: NextFunction) => {
+    const { error, value } = courseValidationSchema.validate(req.body)
+    if (error) {
+        next(error)
+    }
+    else {
+        console.log(value)
+    }
 }
 
 

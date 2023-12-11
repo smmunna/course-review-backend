@@ -10,8 +10,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.courseController = void 0;
-const createCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('I am requesting..');
+const course_validation_1 = require("./course.validation");
+const createCourse = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { error, value } = course_validation_1.courseValidationSchema.validate(req.body);
+    if (error) {
+        next(error);
+    }
+    else {
+        console.log(value);
+    }
 });
 exports.courseController = {
     createCourse,
