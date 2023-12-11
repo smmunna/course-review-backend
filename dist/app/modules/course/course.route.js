@@ -9,4 +9,5 @@ const course_controller_1 = require("./course.controller");
 const router = express_1.default.Router();
 router.post('/', course_controller_1.courseController.createCourse);
 router.get('/', course_controller_1.courseController.getCourses);
+router.put('/', course_controller_1.courseController.updateCourses);
 exports.courseRoutes = router;

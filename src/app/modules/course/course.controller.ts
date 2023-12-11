@@ -48,8 +48,29 @@ const getCourses = async (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const updateCourses = async (req: Request, res: Response, next: NextFunction) => {
+    const value = req.body;
+    const id = req.query.id;
+
+    try {
+        const result = await courseService.updateCoursesToDB(id, value)
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Course updated successfully",
+            "data": result
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        })
+    }
+}
+
 
 export const courseController = {
     createCourse,
     getCourses,
+    updateCourses,
 }

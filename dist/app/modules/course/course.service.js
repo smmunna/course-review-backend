@@ -32,7 +32,12 @@ const getCourseFromDB = (page, limit) => __awaiter(void 0, void 0, void 0, funct
     };
     return finalResult;
 });
+const updateCoursesToDB = (id, value) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield course_model_1.default.findByIdAndUpdate(id, value, { new: true });
+    return result;
+});
 exports.courseService = {
     createCourseToDB,
-    getCourseFromDB
+    getCourseFromDB,
+    updateCoursesToDB,
 };

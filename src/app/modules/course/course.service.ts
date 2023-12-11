@@ -22,7 +22,13 @@ const getCourseFromDB = async (page: any, limit: any) => {
     return finalResult;
 }
 
+const updateCoursesToDB = async (id: any, value: any) => {
+    const result = await courseModel.findByIdAndUpdate(id, value, { new: true })
+    return result;
+}
+
 export const courseService = {
     createCourseToDB,
-    getCourseFromDB
+    getCourseFromDB,
+    updateCoursesToDB,
 }

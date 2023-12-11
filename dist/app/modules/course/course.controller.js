@@ -59,7 +59,27 @@ const getCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
+const updateCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const value = req.body;
+    const id = req.query.id;
+    try {
+        const result = yield course_service_1.courseService.updateCoursesToDB(id, value);
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Course updated successfully",
+            "data": result
+        });
+    }
+    catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        });
+    }
+});
 exports.courseController = {
     createCourse,
     getCourses,
+    updateCourses,
 };
