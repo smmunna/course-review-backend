@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 const cors_1 = __importDefault(require("cors"));
+const course_route_1 = require("./app/modules/course/course.route");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+app.use('/api/courses', course_route_1.courseRoutes);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
