@@ -3,7 +3,7 @@ import Course from "./course.interface";
 
 
 const courseSchema = new Schema<Course>({
-    title: { type: String, required: true },
+    title: { type: String, required: true},
     instructor: { type: String, required: true },
     categoryId: { type: String, required: true },
     price: { type: Number, required: true },

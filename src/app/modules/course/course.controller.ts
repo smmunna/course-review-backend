@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { courseValidationSchema } from "./course.validation";
+import { courseService } from "./course.service";
+import handleSuccessResponse from "../../../middleware/successResponse.middleware";
 
 
 const createCourse = async (req: Request, res: Response, next: NextFunction) => {
@@ -8,9 +10,22 @@ const createCourse = async (req: Request, res: Response, next: NextFunction) => 
         next(error)
     }
     else {
-        console.log(value)
+        try {
+            const result = await courseService.createCourseToDB(value)
+            if (result) {
+                handleSuccessResponse(result, req, res, next)
+            }
+        } catch (error) {
+            res.send({
+                success: false,
+                message: error
+            })
+        }
+
     }
 }
+
+
 
 
 export const courseController = {
