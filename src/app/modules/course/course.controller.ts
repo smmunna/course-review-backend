@@ -25,9 +25,31 @@ const createCourse = async (req: Request, res: Response, next: NextFunction) => 
     }
 }
 
-
+const getCourses = async (req: Request, res: Response, next: NextFunction) => {
+    const { page, limit } = req.query
+    try {
+        const result = await courseService.getCourseFromDB(page, limit)
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Courses retrieved successfully",
+            "meta": {
+                "page": result.pageNumber,
+                "limit": result.limitNumber,
+                "total": result.total
+            },
+            "data": result.result
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        })
+    }
+}
 
 
 export const courseController = {
     createCourse,
+    getCourses,
 }

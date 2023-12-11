@@ -12,6 +12,7 @@ const successResponse_middleware_1 = __importDefault(require("./middleware/succe
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
+app.use('/api/course', course_route_1.courseRoutes);
 app.use('/api/courses', course_route_1.courseRoutes);
 // Handling joi validation error
 app.use(joiError_middleware_1.default);

@@ -18,6 +18,21 @@ const createCourseToDB = (course) => __awaiter(void 0, void 0, void 0, function*
     const result = yield course_model_1.default.create(course);
     return result;
 });
+const getCourseFromDB = (page, limit) => __awaiter(void 0, void 0, void 0, function* () {
+    const pageNumber = parseInt(page) || 1;
+    const limitNumber = parseInt(limit) || 10;
+    const skip = (pageNumber - 1) * limitNumber;
+    const result = yield course_model_1.default.find().skip(skip).limit(limit);
+    const total = yield course_model_1.default.countDocuments();
+    const finalResult = {
+        pageNumber,
+        limitNumber,
+        result,
+        total
+    };
+    return finalResult;
+});
 exports.courseService = {
     createCourseToDB,
+    getCourseFromDB
 };

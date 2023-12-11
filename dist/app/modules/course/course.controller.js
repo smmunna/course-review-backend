@@ -36,6 +36,30 @@ const createCourse = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         }
     }
 });
+const getCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page, limit } = req.query;
+    try {
+        const result = yield course_service_1.courseService.getCourseFromDB(page, limit);
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Courses retrieved successfully",
+            "meta": {
+                "page": result.pageNumber,
+                "limit": result.limitNumber,
+                "total": result.total
+            },
+            "data": result.result
+        });
+    }
+    catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        });
+    }
+});
 exports.courseController = {
     createCourse,
+    getCourses,
 };
