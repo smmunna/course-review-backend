@@ -68,9 +68,28 @@ const updateCourses = async (req: Request, res: Response, next: NextFunction) =>
     }
 }
 
+const getCourseByIdReviews = async (req: Request, res: Response) => {
+    const id = req.params.courseId;
+    try {
+        const result = await courseService.getCourseByIdReviewsFromDB(id)
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Course updated successfully",
+            "data": result
+        })
+    } catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        })
+    }
+}
+
 
 export const courseController = {
     createCourse,
     getCourses,
     updateCourses,
+    getCourseByIdReviews
 }

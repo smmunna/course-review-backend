@@ -10,4 +10,5 @@ const router = express_1.default.Router();
 router.post('/', course_controller_1.courseController.createCourse);
 router.get('/', course_controller_1.courseController.getCourses);
 router.put('/', course_controller_1.courseController.updateCourses);
+router.get('/:courseId/reviews', course_controller_1.courseController.getCourseByIdReviews);
 exports.courseRoutes = router;

@@ -78,8 +78,27 @@ const updateCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         });
     }
 });
+const getCourseByIdReviews = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.courseId;
+    try {
+        const result = yield course_service_1.courseService.getCourseByIdReviewsFromDB(id);
+        res.send({
+            "success": true,
+            "statusCode": 200,
+            "message": "Course updated successfully",
+            "data": result
+        });
+    }
+    catch (error) {
+        res.send({
+            success: false,
+            message: 'Something went wrong'
+        });
+    }
+});
 exports.courseController = {
     createCourse,
     getCourses,
     updateCourses,
+    getCourseByIdReviews
 };

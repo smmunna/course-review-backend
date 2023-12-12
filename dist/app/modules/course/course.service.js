@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.courseService = void 0;
+const review_model_1 = __importDefault(require("../review/review.model"));
 const course_model_1 = __importDefault(require("./course.model"));
 const createCourseToDB = (course) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield course_model_1.default.create(course);
@@ -36,8 +37,18 @@ const updateCoursesToDB = (id, value) => __awaiter(void 0, void 0, void 0, funct
     const result = yield course_model_1.default.findByIdAndUpdate(id, value, { new: true });
     return result;
 });
+const getCourseByIdReviewsFromDB = (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+    const course = yield course_model_1.default.findById(courseId);
+    const reviews = yield review_model_1.default.find({ courseId: courseId });
+    const result = {
+        course,
+        reviews
+    };
+    return result;
+});
 exports.courseService = {
     createCourseToDB,
     getCourseFromDB,
     updateCoursesToDB,
+    getCourseByIdReviewsFromDB
 };
